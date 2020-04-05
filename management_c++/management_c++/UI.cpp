@@ -13,14 +13,59 @@ void UI::menu() {
 	cout << "mode - to change the mode (admin or user)\n";
 }
 
-void UI::add_turret(char *command) {
-	
-}
-void UI::list_turrets(char *command) {
+void UI::add_turret(std::string command) {
+	command.erase(0, 3);
+	int ok = 1;
+	string location, vision, size;
+	int parts, aura_level;
+	std::string str_to_components[5];
+	int j = 0;
+	for (unsigned int i = 0; i < command.length(); ++i) {
+		if (command[i] == ',')
+			j++;
+		else if (command[i] == ' ' and i == 0)
+			continue;
+		else if (command[i] == ' ' and command[i - 1] == ' ')
+			continue;
+		else if (command[i] == ' ' and command[i - 1] == ',')
+			continue;
+		else str_to_components[j] += command[i];
+	}
 
-}
-void UI::delete_turret(char *command) {
+	if (j != 4)
+		ok = 0;
 
+	if (ok) {
+		try
+		{
+			aura_level = std::stoi(str_to_components[2]);
+			parts = std::stoi(str_to_components[3]);
+		}
+		catch (std::logic_error&)
+		{
+			ok = 0;
+		}
+		location = str_to_components[0];
+		size = str_to_components[1];
+		vision = str_to_components[4];
+	}
+	if (ok) {
+		if (this->service.add_turret_repo(location, size, aura_level, parts, vision))
+			cout << "Turret already exists !\n";
+	}
+	else
+		cout << "Invalid turret !\n";
+}
+void UI::list_turrets() {
+	for (int i = 0; i < this->service.get_repo_size(); i++) {
+		Turret t = this->service.get_turret(i);
+		cout << t.message() << "\n";
+	}
+}
+void UI::delete_turret(std::string command) {
+	command.erase (0, 7);
+	if (service.delete_turret_list(command)==-2)
+		cout << "Item does not exist !\n";
 }
 void UI::update_turret(char *command) {
 
@@ -33,7 +78,7 @@ void UI::ui_console() {
 	while (ok)
 	{
 		while (mode == "A" && ok == 1) {
-			char cmd[100], cmd_aux[100], * command;
+			char cmd[100], cmd_aux[100], *command;
 			cout << ">>>";
 			cin.getline(cmd, 100);
 
@@ -51,7 +96,7 @@ void UI::ui_console() {
 				delete_turret(cmd);
 			}
 			else if (strcmp(command, "list") == 0) {
-				list_turrets(cmd);
+				list_turrets();
 			}
 			else if (strcmp(command, "mode") == 0) {
 				command = strtok(0, " ");
@@ -87,7 +132,7 @@ void UI::ui_console() {
 				delete_turret(cmd);
 			}
 			else if (strcmp(command, "list") == 0) {
-				list_turrets(cmd);
+				list_turrets();
 			}
 			else if (strcmp(command, "mode") == 0) {
 				command = strtok(0, " ");
@@ -96,7 +141,7 @@ void UI::ui_console() {
 					cout << "You are now in mode: administrator\n";
 				}
 				else
-					cout << "Invalid user type diiic!\n";
+					cout << "Invalid user type !\n";
 			}
 			else if (strcmp(command, "exit") == 0) {
 				ok = 0;

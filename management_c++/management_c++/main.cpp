@@ -3,9 +3,9 @@
 int main()
 {
 	//Repository repo{}
-	//Service service{ repo }
-	//UI ui{ service }
-	UI ui{};
+	Repository repo{};
+	Service service{ repo };
+	UI ui{ service };
 	ui.ui_console();
 
 	return 0;
