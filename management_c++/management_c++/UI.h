@@ -17,5 +17,5 @@ private:
 	void add_turret(std::string command);
 	void list_turrets();
 	void delete_turret(std::string command);
-	void update_turret(char *command);
+	void update_turret(std::string command);
 };

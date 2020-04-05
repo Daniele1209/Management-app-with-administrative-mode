@@ -67,8 +67,48 @@ void UI::delete_turret(std::string command) {
 	if (service.delete_turret_list(command)==-2)
 		cout << "Item does not exist !\n";
 }
-void UI::update_turret(char *command) {
+void UI::update_turret(std::string command) {
+	command.erase(0, 7);
+	int ok = 1;
+	string location, vision, size;
+	int parts, aura_level;
+	std::string str_to_components[5];
+	int j = 0;
+	for (unsigned int i = 0; i < command.length(); ++i) {
+		if (command[i] == ',')
+			j++;
+		else if (command[i] == ' ' and i == 0)
+			continue;
+		else if (command[i] == ' ' and command[i - 1] == ' ')
+			continue;
+		else if (command[i] == ' ' and command[i - 1] == ',')
+			continue;
+		else str_to_components[j] += command[i];
+	}
 
+	if (j != 4)
+		ok = 0;
+
+	if (ok) {
+		try
+		{
+			aura_level = std::stoi(str_to_components[2]);
+			parts = std::stoi(str_to_components[3]);
+		}
+		catch (std::logic_error&)
+		{
+			ok = 0;
+		}
+		location = str_to_components[0];
+		size = str_to_components[1];
+		vision = str_to_components[4];
+	}
+	if (ok) {
+		if (this->service.update_list(location, size, aura_level, parts, vision) == 0)
+			cout << "Turret does not exist !\n";
+	}
+	else
+		cout << "Invalid turret !\n";
 }
 
 void UI::ui_console() {

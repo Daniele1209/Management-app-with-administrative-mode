@@ -21,6 +21,7 @@ int Service::get_repo_size() {
 	return this->repo.get_the_size();
 }
 
-void Service::update_list(const std::string& location, const std::string& size, const int aura_level, const int parts, const std::string& vision) {
-
+int Service::update_list(const std::string& location, const std::string& size, const int aura_level, const int parts, const std::string& vision) {
+	Turret tur{ location, size, aura_level,parts, vision };
+	return this->repo.update_turret(tur, location);
 }

@@ -30,3 +30,12 @@ int Repository::delete_turret(std::string location) {
 		return -2;
 	}
 }
+
+int Repository::update_turret(const Turret tur, std::string str) {
+	if (this->delete_turret(str) != -2) {
+		this->turrets.add(tur);
+		return 1;
+	}
+	else
+		return 0;
+}

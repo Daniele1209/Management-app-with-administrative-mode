@@ -14,5 +14,5 @@ public:
 	Turret get_turret(int pos);
 	int get_repo_size();
 	int delete_turret_list(std::string command);
-	void update_list(const std::string& location, const std::string& size, const int aura_level, const int parts, const std::string& vision);
+	int update_list(const std::string& location, const std::string& size, const int aura_level, const int parts, const std::string& vision);
 };
