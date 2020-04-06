@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "turret.h"
+#define _CRT_SECURE_NO_WARNINGS
 
 template <typename T>
 class Dynamic_vector
@@ -22,7 +23,6 @@ public:
 	int find_element(std::string str);
 	int delete_item(int index);
 	T& find(std::string str);
-	//Dynamic_vector& operator=(const Dynamic_vector& vector);
 
 private:
 	void resize();
@@ -35,14 +35,8 @@ public:
 
 	public:
 		iterator(T* pointer) : ptr{ pointer } {}
-		//T& operator*();
-		//bool operator!=(const iterator& it);
-		//iterator operator++();
-		//iterator operator++(int x);
 	};
 
-	//typename iterator begin();
-	//typename iterator end();
 };
 
 template<typename T>
@@ -112,18 +106,6 @@ inline Dynamic_vector<T>::Dynamic_vector(const Dynamic_vector& vector)
 	for (int i = 0; i < this->size; i++)
 		this->elems[i] = vector.elems[i];
 }
-/*
-template<typename T>
-inline Dynamic_vector<T>& Dynamic_vector<T>::operator=(const Dynamic_vector& vector)
-{
-	Dynamic_vector<T> temp{ vector };
-	std::swap(temp.elems, this->elems);
-	std::swap(temp.capacity, this->capacity);
-	std::swap(temp.size, this->size);
-
-	return *this;
-}
-*/
 
 template<typename T>
 inline void Dynamic_vector<T>::resize()
@@ -135,43 +117,3 @@ inline void Dynamic_vector<T>::resize()
 	delete[] this->elems;
 	this->elems = aux;
 }
-/*
-template<typename T>
-inline typename Dynamic_vector<T>::iterator Dynamic_vector<T>::begin()
-{
-	return iterator{ this->elems };
-}
-
-template<typename T>
-inline typename Dynamic_vector<T>::iterator Dynamic_vector<T>::end()
-{
-	return iterator{ this->elems + this->size };
-}
-
-template<typename T>
-inline T& Dynamic_vector<T>::iterator::operator*()
-{
-	return *this->ptr;
-}
-
-template<typename T>
-inline bool Dynamic_vector<T>::iterator::operator!=(const iterator& it)
-{
-	return this->ptr != it.ptr;
-}
-
-template<typename T>
-inline typename Dynamic_vector<T>::iterator Dynamic_vector<T>::iterator::operator++()
-{
-	this->ptr++;
-	return *this;
-}
-
-template<typename T>
-inline typename Dynamic_vector<T>::iterator Dynamic_vector<T>::iterator::operator++(int x)
-{
-	iterator aux{ *this };
-	this->ptr++;
-	return aux;
-}
-*/
