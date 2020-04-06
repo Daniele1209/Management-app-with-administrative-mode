@@ -104,7 +104,7 @@ void UI::update_turret(std::string command) {
 		vision = str_to_components[4];
 	}
 	if (ok) {
-		if (this->service.update_list(location, size, aura_level, parts, vision) == 0)
+		if (this->service.update_list(location, size, aura_level, parts, vision)==0)
 			cout << "Turret does not exist !\n";
 	}
 	else
@@ -162,19 +162,7 @@ void UI::ui_console() {
 			strcpy(cmd_aux, cmd);
 			command = strtok(cmd_aux, " ");
 
-			if (strcmp(command, "add") == 0) {
-				add_turret(cmd);
-			}
-			else if (strcmp(command, "update") == 0) {
-				update_turret(cmd);
-			}
-			else if (strcmp(command, "delete") == 0) {
-				delete_turret(cmd);
-			}
-			else if (strcmp(command, "list") == 0) {
-				list_turrets();
-			}
-			else if (strcmp(command, "mode") == 0) {
+			if (strcmp(command, "mode") == 0) {
 				command = strtok(0, " ");
 				if (strcmp(command, "A") == 0) {
 					mode = "A";

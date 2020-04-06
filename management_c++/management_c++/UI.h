@@ -1,6 +1,7 @@
 #pragma once
 #include "turret.h"
 #include "service.h"
+#define _CRT_SECURE_NO_WARNINGS
 
 class UI {
 

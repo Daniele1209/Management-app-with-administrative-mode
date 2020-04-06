@@ -1,6 +1,7 @@
 #pragma once
 #include "turret.h"
 #include "dynamic_array.h"
+#define _CRT_SECURE_NO_WARNINGS
 
 class Repository {
 private:
