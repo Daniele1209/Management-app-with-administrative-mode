@@ -13,6 +13,40 @@ void UI::menu() {
 	cout << "mode - to change the mode (admin or user)\n";
 }
 
+//UI for WATCHMAN user
+void UI::next_turret() {
+	watcher.next();
+	list_turret(watcher.current_turret());
+}
+
+void UI::list_mylist() {
+	Dynamic_vector<Turret> turret = this->watcher.get_turret_list();
+	for (int i = 0; i < turret.get_size(); i++)
+	{
+		Turret t = turret.get(i);
+		cout << t.message() << "\n";
+	}
+}
+
+void UI::save_mylist(std::string command) {
+	command.erase(0, 5);
+	cout << command << "\n";
+	watcher.add_turret_mylist(command);
+	cout << "Turret added !\n";
+
+}
+
+void UI::sort_list(std::string command) {
+	command.erase(0, 4);
+	cout << watcher.turret_list(command);
+}
+
+void UI::list_turret(Turret t) {
+	std::cout << "Current:\n";
+	std::cout << t.message() << "\n";
+}
+
+//UI for ADMIN user
 void UI::add_turret(std::string command) {
 	command.erase(0, 3);
 	int ok = 1;
@@ -170,6 +204,21 @@ void UI::ui_console() {
 				}
 				else
 					cout << "Invalid user type !\n";
+			}
+			else if (strcmp(command, "next") == 0) {
+				next_turret();
+			}
+			else if (strcmp(command, "mylist") == 0) {
+				list_mylist();
+			}
+			else if (strcmp(command, "save") == 0) {
+				save_mylist(cmd);
+			}
+			else if (strcmp(command, "list") == 0) {
+				if (strlen(cmd) != 4)
+					sort_list(cmd);
+				else
+					cout << "Not a valid command !\n";
 			}
 			else if (strcmp(command, "exit") == 0) {
 				ok = 0;

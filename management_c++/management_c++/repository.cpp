@@ -10,9 +10,10 @@ int Repository::add_turret(const Turret& tur) {
 	return 0;
 }
 
-//Turret Repository::find_turret_location(const std::string& location) {
+Turret Repository::find_turret_location(int location) {
+	return this->turrets.get(location);
+}
 
-//}
 int Repository::get_the_size() {
 	return turrets.get_size();
 }
@@ -20,6 +21,10 @@ int Repository::get_the_size() {
 Turret Repository::get_all_turrets(int pos) {
 	return turrets[pos];
 
+}
+
+Turret Repository::find_turret(std::string location) {
+	return turrets.find(location);
 }
 
 int Repository::delete_turret(std::string location) {
@@ -38,4 +43,8 @@ int Repository::update_turret(const Turret tur, std::string str) {
 	}
 	else
 		return 0;
+}
+
+Dynamic_vector<Turret> Repository::get_turrets() {
+	return this->turrets;
 }
