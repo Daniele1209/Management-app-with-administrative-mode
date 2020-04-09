@@ -178,6 +178,9 @@ void UI::ui_console() {
 					mode = "B";
 					cout << "You are now in mode: user\n";
 				}
+				else if (strcmp(command, "A") == 0) {
+					cout << "You are now in mode: admin\n";
+				}
 				else
 					cout << "Invalid user type !\n";
 			}
@@ -201,6 +204,9 @@ void UI::ui_console() {
 				if (strcmp(command, "A") == 0) {
 					mode = "A";
 					cout << "You are now in mode: administrator\n";
+				}
+				else if (strcmp(command, "B") == 0) {
+					cout << "You are now in mode: user\n";
 				}
 				else
 					cout << "Invalid user type !\n";
