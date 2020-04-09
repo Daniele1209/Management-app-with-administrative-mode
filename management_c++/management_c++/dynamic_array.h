@@ -23,6 +23,7 @@ public:
 	int find_element(std::string str);
 	int delete_item(int index);
 	T& find(std::string str);
+	T& get(int index);
 
 private:
 	void resize();
@@ -89,11 +90,17 @@ inline T& Dynamic_vector<T>::operator[](int position)
 }
 
 template<typename T>
+inline T& Dynamic_vector<T>::get(int position)
+{
+	return this->elems[position];
+}
+
+template<typename T>
 inline T& Dynamic_vector<T>::find(std::string str)
 {
 	for (int i = 0; i < this->get_size(); ++i)
 		if (elems[i].get_location() == str)
-			return 1;
+			return elems[i];
 	throw 404;
 }
 
