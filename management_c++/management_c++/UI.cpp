@@ -15,8 +15,12 @@ void UI::menu() {
 
 //UI for WATCHMAN user
 void UI::next_turret() {
-	watcher.next();
-	list_turret(watcher.current_turret());
+	if (service.get_repo_size() != 0) {
+		watcher.next();
+		list_turret(watcher.current_turret());
+	}
+	else
+		cout << "The main list is empty !\n";
 }
 
 void UI::list_mylist() {
